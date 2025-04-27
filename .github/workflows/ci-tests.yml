@@ -8,6 +8,7 @@ on:
 
 jobs:
   build-test:
+    name: Test in Docker Compose (Test Stack)
     runs-on: ubuntu-latest
 
     env:
