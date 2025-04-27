@@ -12,10 +12,6 @@ jobs:
     steps:
       - name: Check Source and Target Branches
         run: |
-          if [ "${{ github.base_ref }}" != "master" ]; then
-            echo "This PR is not targeting the master branch."
-            exit 1
-          fi
           if [ "${{ github.head_ref }}" != "staging" ]; then
             echo "Merges to master are only allowed from the staging branch."
             exit 1
