@@ -14,8 +14,6 @@ services:
   app:
     build:
       context: ../..
-    env_file:
-      - .env
     command: npm run dev
     container_name: node-app
     volumes:
@@ -23,6 +21,10 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/
+      - MONGO_DB=testDB
+      - PORT=3000
     depends_on:
       - mongo
 

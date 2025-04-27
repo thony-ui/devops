@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHandler";
 import { defineMongoDBTestRouter } from "./modules/mongo-test";
 import { connectToMongo } from "./config/mongo";
-import { Server } from "http";
-import { seedDatabase } from "./seed/seed";
 
 dotenv.config();
 
@@ -25,7 +23,6 @@ const PORT = process.env.PORT || 9998;
 export async function startServer() {
   try {
     await connectToMongo();
-    await seedDatabase();
 
     const server = app.listen(PORT, () =>
       console.log(`✅ Server running on port ${PORT}`)
