@@ -1,4 +1,4 @@
-import { mongoDB } from "../../../config/mongo";
+import { mongoDB } from "../../../db/mongo";
 import logger from "../../../utils/logger";
 
 export const getAllStudentsService = async () => {

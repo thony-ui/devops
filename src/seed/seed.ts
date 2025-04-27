@@ -1,4 +1,5 @@
-import { mongoDB } from "../config/mongo";
+import { mongoDB } from "../db/mongo";
+
 export async function seedDatabase() {
   try {
     const db = mongoDB();

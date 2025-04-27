@@ -2,7 +2,7 @@ import request from "supertest";
 import { app, server } from "../../../test-app";
 import dotenv from "dotenv";
 import { seedDatabase } from "../../../seed/seed";
-import { disconnectFromMongo } from "../../../config/mongo";
+import { disconnectFromMongo } from "../../../db/mongo";
 
 dotenv.config();
 
