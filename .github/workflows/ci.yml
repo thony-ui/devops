@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build and Run Docker Compose
+      - name: Build and Run  Docker Compose
         run: |
           docker compose -f infra/docker/docker-compose.test.yml up --build -d
 
