@@ -1,19 +1,16 @@
 import request from "supertest";
-import { app, startServer } from "../../../test-app";
+import { app, server } from "../../../test-app";
 import { Server } from "http";
 import dotenv from "dotenv";
 import { seedDatabase } from "../../../seed/seed";
 
 dotenv.config();
 
-let server: Server;
-
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 beforeAll(async () => {
-  server = await startServer(); // wait until server actually starts
   await sleep(2000);
   await seedDatabase(); // Seed the database before the test
 });

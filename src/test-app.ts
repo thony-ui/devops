@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHandler";
 import { defineMongoDBTestRouter } from "./modules/mongo-test";
 import { connectToMongo } from "./config/mongo";
+import { Server } from "http";
 
 dotenv.config();
 
@@ -20,11 +21,12 @@ const PORT = process.env.PORT || 9998;
 
 // Wrap startup logic inside an async function
 
+let server: Server;
 export async function startServer() {
   try {
     await connectToMongo();
 
-    const server = app.listen(PORT, () =>
+    server = app.listen(PORT, () =>
       console.log(`✅ Server running on port ${PORT}`)
     );
     // Optional: export server if needed (for testing)
@@ -38,4 +40,4 @@ export async function startServer() {
 // Start the server
 startServer();
 
-export { app };
+export { app, server };
