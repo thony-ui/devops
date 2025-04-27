@@ -13,7 +13,7 @@ services:
     build:
       context: ../..
     env_file:
-      - .env
+      - .env.test
     command: npm run dev
     container_name: node-app-test
     volumes:
