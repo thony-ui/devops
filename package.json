@@ -6,8 +6,10 @@
   "scripts": {
     "start": "tsc && node dist/app.js",
     "dev": "ts-node-dev --respawn src/app.ts",
-    "test": "jest --detectOpenHandles --forceExit",
-    "build": "tsc"
+    "test": "npm run test:docker",
+    "test:docker": "bash ./scripts/test-env.sh",
+    "build": "tsc",
+    "test:only": "jest --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,28 @@
+services:
+  mongo-test: # <------ Different name
+    image: mongo:6.0
+    container_name: mongo-test
+    ports:
+      - "27018:27017" # Optional different external port
+    environment:
+      MONGO_INITDB_DATABASE: testDB
+    volumes:
+      - mongo-test-data:/data/db
+
+  app-test:
+    build:
+      context: ../..
+    env_file:
+      - .env.test
+    command: npm run dev
+    container_name: node-app-test
+    volumes:
+      - ../../:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000" # Optional different external port
+    depends_on:
+      - mongo-test
+
+volumes:
+  mongo-test-data:
