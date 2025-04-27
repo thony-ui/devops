@@ -35,7 +35,7 @@
     # RUN npm install -g pm2
     
     # Expose the app port
-    EXPOSE 9998
+    EXPOSE 3000
     
     # Default command
     CMD ["node", "dist/app.js"]
