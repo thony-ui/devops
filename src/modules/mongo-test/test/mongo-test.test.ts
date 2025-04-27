@@ -2,6 +2,7 @@ import request from "supertest";
 import { app, server } from "../../../test-app";
 import dotenv from "dotenv";
 import { seedDatabase } from "../../../seed/seed";
+import { disconnectFromMongo } from "../../../config/mongo";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ beforeAll(async () => {
 });
 
 afterAll(() => {
+  disconnectFromMongo();
   server.close();
 });
 describe("MongoTest API", () => {

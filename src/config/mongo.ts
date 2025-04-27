@@ -32,3 +32,9 @@ export const mongoDB = () => {
   }
   return db;
 };
+
+export const disconnectFromMongo = async () => {
+  if (client) {
+    await client.close();
+  }
+};
