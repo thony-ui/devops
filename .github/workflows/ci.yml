@@ -21,15 +21,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build and Run Docker Compose
+      - name: Build and Run  Docker Compose
         run: |
-          docker compose -f infra/docker/docker-compose.dev.yml up --build -d
+          docker compose -f infra/docker/docker-compose.test.yml up --build -d
 
       - name: Run Tests inside app container
         run: |
-          docker exec node-app npm run test
+          docker exec node-app-test npm run test:only
 
       - name: Shut down Docker Compose
         if: always()
         run: |
-          docker compose -f infra/docker/docker-compose.dev.yml down -v
+          docker compose -f infra/docker/docker-compose.test.yml down -v

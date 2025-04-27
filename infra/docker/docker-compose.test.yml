@@ -1,0 +1,28 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongo-test
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_DATABASE: mydb
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build:
+      context: ../..
+    env_file:
+      - .env.test
+    command: npm run dev
+    container_name: node-app-test
+    volumes:
+      - ../../:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
