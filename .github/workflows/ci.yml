@@ -9,6 +9,11 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
 
+    env:
+      DOCKER_BUILDKIT: 1
+      COMPOSE_DOCKER_CLI_BUILD: 1
+      COMPOSE_PROJECT_NAME: test-stack-${{ github.run_id }}-${{ github.run_attempt }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,15 +26,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Build and Run  Docker Compose
+      - name: Build and Run Docker Compose (Test Stack)
         run: |
           docker compose -f infra/docker/docker-compose.test.yml up --build -d
 
       - name: Run Tests inside app container
         run: |
-          docker exec node-app-test npm run test:only
+          docker exec ${COMPOSE_PROJECT_NAME}_node-app-test_1 npm run test:only
 
-      - name: Shut down Docker Compose
+      - name: Shut down Docker Compose (Test Stack)
         if: always()
         run: |
           docker compose -f infra/docker/docker-compose.test.yml down -v
