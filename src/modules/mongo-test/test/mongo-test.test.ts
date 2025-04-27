@@ -2,10 +2,10 @@ import request from "supertest";
 import { app, startServer } from "../../../test-app";
 import { Server } from "http";
 import dotenv from "dotenv";
+import { seedDatabase } from "../../../seed/seed";
 
 dotenv.config();
-process.env.MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017";
-process.env.MONGO_DB = process.env.MONGO_DB || "testDB";
+
 let server: Server;
 
 function sleep(ms: number) {
@@ -14,18 +14,12 @@ function sleep(ms: number) {
 
 beforeAll(async () => {
   server = await startServer(); // wait until server actually starts
-  await sleep(500);
+  await sleep(2000);
+  await seedDatabase(); // Seed the database before the test
 });
 
-afterAll(async () => {
-  if (server) {
-    await new Promise((resolve, reject) => {
-      server.close((err) => {
-        if (err) return reject(err);
-        resolve(null);
-      });
-    });
-  }
+afterAll(() => {
+  server.close();
 });
 describe("MongoTest API", () => {
   describe("GET /", () => {
