@@ -2,8 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHandler";
 import { defineMongoDBTestRouter } from "./modules/mongo-test";
-import { Server } from "http";
-import { seedDatabase } from "./seed/seed";
 import { connectToMongo } from "./db/mongo";
 
 dotenv.config();

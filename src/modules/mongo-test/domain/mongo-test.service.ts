@@ -1,5 +1,5 @@
-import { mongoDB } from "../../../db/mongo";
-import logger from "../../../utils/logger";
+import { mongoDB } from "@/db/mongo";
+import logger from "@/utils/logger";
 
 export const getAllStudentsService = async () => {
   logger.info("Fetching all students from the database");
