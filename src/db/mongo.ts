@@ -1,5 +1,5 @@
+import { env } from "@/config/env";
 import { MongoClient, Db } from "mongodb";
-import { env } from "../config/env";
 
 const uri = env.MONGO_URI as string;
 const dbName = env.MONGO_DB as string;

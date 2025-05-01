@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import * as mongoTestService from "./mongo-test.service";
-import logger from "../../../utils/logger";
+import logger from "@/utils/logger";
 
 export const getAllStudentsController = async (
   req: Request,

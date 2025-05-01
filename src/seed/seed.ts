@@ -1,4 +1,4 @@
-import { mongoDB } from "../db/mongo";
+import { mongoDB } from "@/db/mongo";
 
 export async function seedDatabase() {
   try {
