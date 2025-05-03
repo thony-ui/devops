@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHandler";
-import { defineMongoDBTestRouter } from "./modules/mongo-test";
+import { defineStudentRouter } from "./modules/student";
 import { Server } from "http";
 import { connectToMongo } from "./db/mongo";
 
@@ -14,7 +14,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
   res.json({ message: "Hello World" });
 });
 
-defineMongoDBTestRouter(app);
+defineStudentRouter(app);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 9998;

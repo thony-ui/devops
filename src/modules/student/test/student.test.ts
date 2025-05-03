@@ -1,8 +1,8 @@
 import request from "supertest";
 import { app, server } from "../../../test-app";
 import dotenv from "dotenv";
-import { seedDatabase } from "@/seed/seed";
-import { disconnectFromMongo } from "@/db/mongo";
+import { seedDatabase } from "../../../seed/seed";
+import { disconnectFromMongo } from "../../../db/mongo";
 
 dotenv.config();
 
@@ -20,14 +20,14 @@ afterAll(() => {
   disconnectFromMongo();
   server.close();
 });
-describe("MongoTest API", () => {
+describe("student API", () => {
   it("should return 200 for the base route", async () => {
     const res = await request(app).get("/");
 
     expect(res.status).toBe(200);
   });
   it("should return 200 and an array of students", async () => {
-    const res = await request(app).get("/mongo-test/students");
+    const res = await request(app).get("/v1/api/students");
 
     expect(res.status).toBe(200);
     expect(res.body).toBeInstanceOf(Array);
