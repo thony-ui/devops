@@ -30,6 +30,16 @@ describe("Student service unit tests", () => {
     expect(students).toEqual(mockStudents);
     expect(studentRepositoryMock.getAllStudentsService).toHaveBeenCalled();
   });
+
+  it("should throw an error if repository fails", async () => {
+    const error = new Error("Database error");
+    studentRepositoryMock.getAllStudentsService.mockRejectedValue(error);
+
+    await expect(studentService.getAllStudentsService()).rejects.toThrow(
+      "Database error"
+    );
+    expect(studentRepositoryMock.getAllStudentsService).toHaveBeenCalled();
+  });
 });
 
 describe("Student controller unit tests", () => {
@@ -73,5 +83,20 @@ describe("Student controller unit tests", () => {
     expect(response.status).toHaveBeenCalledWith(200);
     expect(studentServiceMock.getAllStudentsService).toHaveBeenCalled();
     expect(response.json).toHaveBeenCalledWith(mockStudents);
+  });
+
+  it("should pass error to nextFunction if service fails", async () => {
+    const error = new Error("Service error");
+    studentServiceMock.getAllStudentsService.mockRejectedValue(error);
+
+    await studentController.getAllStudentsController(
+      request as Request,
+      response as Response,
+      nextFunction
+    );
+
+    expect(nextFunction).toHaveBeenCalledWith(error);
+    expect(response.status).not.toHaveBeenCalled();
+    expect(response.json).not.toHaveBeenCalled();
   });
 });

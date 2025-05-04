@@ -8,7 +8,7 @@ export class StudentsController {
   getAllStudentsController = async (
     req: Request,
     res: Response,
-    _next: NextFunction
+    next: NextFunction
   ): Promise<void> => {
     try {
       logger.info("Fetching all students");
@@ -16,7 +16,7 @@ export class StudentsController {
       res.status(200).json(students);
     } catch (error) {
       logger.error("Error fetching students: ", error);
-      res.status(500).json({ message: "Error fetching students" });
+      next(error);
     }
   };
 }
