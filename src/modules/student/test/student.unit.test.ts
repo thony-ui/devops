@@ -53,6 +53,11 @@ describe("Student controller unit tests", () => {
     studentServiceMock = {
       getAllStudentsService: jest.fn(),
     } as unknown as jest.Mocked<StudentService>;
+    nextFunction = jest.fn();
+    studentController = new StudentsController(studentServiceMock);
+  });
+
+  it("should fetch all students", async () => {
     request = {
       params: {},
       body: {},
@@ -62,11 +67,7 @@ describe("Student controller unit tests", () => {
       json: jest.fn(),
       status: jest.fn().mockReturnThis(),
     };
-    nextFunction = jest.fn();
-    studentController = new StudentsController(studentServiceMock);
-  });
 
-  it("should fetch all students", async () => {
     const mockStudents: IStudentModel[] = [
       { _id: new ObjectId(), name: "Alice", age: 21 },
       { _id: new ObjectId(), name: "Bob", age: 22 },
@@ -86,6 +87,15 @@ describe("Student controller unit tests", () => {
   });
 
   it("should pass error to nextFunction if service fails", async () => {
+    request = {
+      params: {},
+      body: {},
+      query: {},
+    };
+    response = {
+      json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
+    };
     const error = new Error("Service error");
     studentServiceMock.getAllStudentsService.mockRejectedValue(error);
 
