@@ -9,7 +9,9 @@
     "test": "npm run test:docker",
     "test:docker": "bash ./scripts/test-env.sh",
     "build": "tsc",
-    "test:only": "jest --detectOpenHandles --forceExit",
+    "test:all": "jest --detectOpenHandles --forceExit",
+    "test:e2e": "jest '.*\\.e2e\\.test\\.ts$' --detectOpenHandles --forceExit",
+    "test:unit": "jest '.*\\.unit\\.test\\.ts$' --detectOpenHandles --forceExit",
     "prepare": "husky",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
