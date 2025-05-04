@@ -32,9 +32,13 @@ jobs:
         run: |
           docker compose -f infra/docker/docker-compose.test.yml up --build -d
 
-      - name: Run Tests inside app container
+      - name: Run end to end tests inside app container
         run: |
-          docker exec node-app-test npm run test:only
+          docker exec node-app-test npm run test:e2e
+
+      - name: Run unit tests inside app container
+        run: |
+          docker exec node-app-test npm run test:unit
 
       - name: Shut down Docker Compose (Test Stack)
         if: always()
